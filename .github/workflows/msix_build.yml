@@ -27,10 +27,10 @@ jobs:
       - name: Create MSIX Package
         run: |
           flutter build windows --msix --verbose
-          rename-item -path ./example/build/windows/runner/Output/msix/Fluent UI for Flutter Client.msix -newname FluentUIforFlutterClient.msix
+          rename-item -path ./example/build/windows/runner/Output/msix/Fluent_UI_for_Flutter_Client.msix -newname FluentUIforFlutterClient.msix
         working-directory: ./example
       - name: Upload MSIX Package
         uses: actions/upload-artifact@v3
         with:
           name: FluentUIforFlutterClient
-          path: ./example/build/windows/runner/Output/msix/FluentUIforFlutterClient.msix
+          path: ./example/build/windows/runner/Output/msix/Fluent_UI_for_Flutter_Client.msix
