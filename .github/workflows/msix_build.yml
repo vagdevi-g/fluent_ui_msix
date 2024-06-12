@@ -1,4 +1,30 @@
- - name: Create MSIX Package
+name: Fluent UI for Flutter Client
+on:
+  
+  workflow_dispatch:
+
+jobs:
+  build_windows:
+    name: Windows Client
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          submodules: recursive
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+          cache: true
+      - run: git config --system core.longpaths true
+      - name: Flutter Pub Get
+        run: flutter pub get
+        working-directory: ./example
+      - name: Build for Windows
+        run: flutter build windows --verbose
+        working-directory: ./example
+      - name: Create MSIX Package
         run: |
           flutter build windows --msix --verbose
           rename-item -path ./example/build/windows/runner/Output/msix/Fluent UI for Flutter Client.msix -newname FluentUIforFlutterClient.msix
@@ -8,4 +34,3 @@
         with:
           name: FluentUIforFlutterClient
           path: ./example/build/windows/runner/Output/msix/FluentUIforFlutterClient.msix
-Here's what's new:
